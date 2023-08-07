@@ -1,0 +1,41 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build_minios",
+            "type": "shell",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceRoot}/"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "clean_minios",
+            "type": "shell",
+            "command": "make clean",
+            "options": {
+                "cwd": "${workspaceRoot}/"
+            },
+        },
+        {
+            "label": "run_qemu",
+            "type": "shell",
+            "command": "${workspaceRoot}/scripts/qemu-debug.bat",
+            "options": {
+                "cwd": "${workspaceRoot}/image/"
+            },
+        },
+        {
+            "label": "debug_minios",
+            "dependsOrder": "sequence",
+            "dependsOn": ["build_minios", "run_qemu"]
+        },
+    ]
+
+}
